@@ -40,7 +40,7 @@ def predict_folder(folder_path, model, device):
 
 # Example usage:
 # For single image
-print("Prediction:", predict_image("testing/004.jpg", model, device))
+print("Prediction:", predict_image("testing/005.jpeg", model, device))
 
 # For folder
 # predict_folder("testing", model, device)
