@@ -7,6 +7,6 @@ EPOCHS = 40
 LEARNING_RATE = 1e-4
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-DATA_DIR = "Cloud_Types"
+DATA_DIR = "data2"
 MODEL_PATH = "resnet50_cloud_finetuned.pth"
 CLASS_NAMES = ['Ac', 'As', 'Cb', 'Cc', 'Ci', 'Cl', 'Cs', 'Ct', 'Cu', 'Ns', 'Sc', 'St']
