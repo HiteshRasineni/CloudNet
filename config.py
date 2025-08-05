@@ -5,7 +5,7 @@ NUM_CLASSES = 12  # Based on your image (10 folders)
 IMG_SIZE = 224
 EPOCHS = 40
 LEARNING_RATE = 1e-4
-DEVICE = torch.device("cuda")
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 DATA_DIR = "Cloud_Types"
 MODEL_PATH = "resnet50_cloud_finetuned.pth"
