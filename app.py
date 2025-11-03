@@ -14,7 +14,7 @@ UPLOAD_FOLDER = "static/uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 # Load model
-model = get_model()
+model = get_model(embedding_dim=config.EMBEDDING_DIM, use_supcon=config.USE_SUPCON)
 model.load_state_dict(torch.load(config.MODEL_PATH, map_location=config.DEVICE))
 model.to(config.DEVICE)
 model.eval()

@@ -8,7 +8,7 @@ import config
 from model import get_model
 
 device = config.DEVICE
-model = get_model()
+model = get_model(embedding_dim=config.EMBEDDING_DIM, use_supcon=config.USE_SUPCON)
 model.load_state_dict(torch.load(config.MODEL_PATH, map_location=device))
 model.to(device)
 model.eval()

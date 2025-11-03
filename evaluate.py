@@ -22,7 +22,7 @@ data_loader = DataLoader(dataset, batch_size=config.BATCH_SIZE, shuffle=False)
 
 # ---------- Load Model ----------
 device = config.DEVICE
-model = get_model().to(device)
+model = get_model(embedding_dim=config.EMBEDDING_DIM, use_supcon=config.USE_SUPCON).to(device)
 model.load_state_dict(torch.load(config.MODEL_PATH, map_location=device))
 model.eval()
 
