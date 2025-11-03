@@ -53,4 +53,4 @@ def predict_folder(folder_path, model, device, threshold=0.4):
         print("\nConfusion Matrix:\n", confusion_matrix(y_true, y_pred))
         print("\nClassification Report:\n", classification_report(y_true, y_pred, target_names=config.CLASS_NAMES))
 
-predict_folder("testing", model, device, threshold=0.4)
+predict_folder(r"C:\Users\rrohi\Desktop\weather_project\CloudNet\testing", model, device, threshold=0.4)

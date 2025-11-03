@@ -20,6 +20,9 @@ transform = transforms.Compose([
 dataset = datasets.ImageFolder(root=config.DATA_DIR, transform=transform)
 data_loader = DataLoader(dataset, batch_size=config.BATCH_SIZE, shuffle=False)
 
+# Use the class ordering from the dataset to avoid mismatches with config
+class_names = dataset.classes
+
 # ---------- Load Model ----------
 device = config.DEVICE
 model = get_model().to(device)
@@ -34,7 +37,8 @@ print("Evaluating model...")
 with torch.no_grad():
     for images, labels in tqdm(data_loader, desc="Evaluating", unit="batch"):
         images, labels = images.to(device), labels.to(device)
-        outputs = model(images)
+        # Forward in classification mode (proj=False) to get class logits
+        outputs = model(images, proj=False)
         _, predicted = torch.max(outputs, 1)
 
         all_preds.extend(predicted.cpu().numpy())
@@ -42,7 +46,7 @@ with torch.no_grad():
 
 # ---------- Metrics ----------
 print("\nClassification Report:")
-print(classification_report(all_labels, all_preds, target_names=config.CLASS_NAMES))
+print(classification_report(all_labels, all_preds, target_names=class_names))
 
 acc = accuracy_score(all_labels, all_preds)
 print(f"Overall Accuracy: {acc*100:.2f}%")
@@ -57,9 +61,9 @@ plt.figure(figsize=(10, 8))
 plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
 plt.title("Confusion Matrix")
 plt.colorbar()
-tick_marks = np.arange(len(config.CLASS_NAMES))
-plt.xticks(tick_marks, config.CLASS_NAMES, rotation=45)
-plt.yticks(tick_marks, config.CLASS_NAMES)
+tick_marks = np.arange(len(class_names))
+plt.xticks(tick_marks, class_names, rotation=45)
+plt.yticks(tick_marks, class_names)
 
 # Add annotations
 thresh = cm.max() / 2.

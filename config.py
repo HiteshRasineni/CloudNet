@@ -1,6 +1,12 @@
 import torch
 
 BATCH_SIZE = 32
+
+SUPCON_EPOCHS = 20
+FINETUNE_EPOCHS = 10
+SUPCON_MODEL_PATH = "supcon_encoder.pth"
+FINETUNE_LR = 1e-3
+
 NUM_CLASSES = 12  # Based on your image (10 folders)
 IMG_SIZE = 224
 EPOCHS = 40
